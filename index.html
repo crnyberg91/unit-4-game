@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+        integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='assets/css/reset.css' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel='stylesheet' href='assets/css/style.css' type='text/css'>
+    <script src='assets/javascript/game.js'></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div class='container'>
+        <div class='row justify-content-between'>
+            <div class='col-4'>
+
+            </div>
+            <div class='col-4'>
+                <h1>Star Wars Game</h1>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-8 game-box'>
+
+                <div class='row' id='select'>
+                    <div class='char' id='yoda'>
+                        <p class='char-name'>Yoda</p>
+                        <img src='assets/images/yoda.jpg'>
+                        <p class='health-bar'>80</p>
+                    </div>
+                    <div class='char' id='luke'>
+                        <p class='char-name'>Luke</p>
+                        <img src='assets/images/luke.jpg'>
+                        <p class='health-bar'>100</p>
+                    </div>
+                    <div class='char' id='vader'>
+                        <p class='char-name'>Darth Vader</p>
+                        <img src='assets/images/vader.jpg'>
+                        <p class='health-bar'>180</p>
+                    </div>
+                    <div class='char' id='han'>
+                        <p class='char-name'>Han Solo</p>
+                        <img src='assets/images/han.jpg'>
+                        <p class='health-bar'>90</p>
+                    </div>
+                </div>
+
+                <h3>Your Character</h3>
+                <div class='row' id='player'>
+                    <!-- move selected char here -->
+                </div>
+                <h3>Enemies available to attack</h3>
+                <div class='row' id='enemy-select'>
+                    <!--move enemies available to attack here-->
+                </div>
+                <h3>fight section</h3>
+                <button id='attack'>Attack</button>
+                <h3>Defender</h3>
+                <div class='row' id='enemy'>
+                    <!-- move selected enemy here -->
+                </div>
+                <div class='attackInfo'>
+                    <p id='dmgText1'></p>
+                    <p id='dmgText2'></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

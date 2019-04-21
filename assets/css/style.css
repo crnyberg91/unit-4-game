@@ -1,0 +1,50 @@
+body {
+    background: #666666;
+}
+
+.game-box {
+    border: 3px solid #ffffff;
+    padding: 20px;
+}
+
+.char {
+    float: left;
+    height: 150px;
+    width: 150px;
+    text-align: center;
+    background: #ffffff;
+    border: 2px solid #2fa339
+}
+
+.red {
+    background: rgb(201, 15, 15);
+}
+.char img {
+    height: 90px;
+    width: 90px;
+}
+
+.char p {
+    padding: 0;
+    margin: 0;
+}
+
+#player {
+    /* float: left; */
+    height: 150px;
+    width: 100%;
+}
+
+#enemy-select {
+    /* float: left; */
+    width: 100%;
+}
+#enemy {
+    /* float: left; */
+    height: 150px;
+    width: 100%;
+}
+
+#dmgText1 {
+    margin-bottom: 10px;
+}
