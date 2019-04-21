@@ -1,10 +1,14 @@
 body {
-    background: #666666;
+    background-image: url('../images/def-wallpaper.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .game-box {
-    border: 3px solid #ffffff;
+    background-color: #ffffff;
+    border: 3px solid #666666;
     padding: 20px;
+    opacity: .8;
 }
 
 .char {
@@ -17,7 +21,7 @@ body {
 }
 
 .red {
-    background: rgb(201, 15, 15);
+    background-color: rgb(201, 15, 15);
 }
 .char img {
     height: 90px;
@@ -29,6 +33,23 @@ body {
     margin: 0;
 }
 
+.selected-char {
+    float: left;
+    height: 150px;
+    width: 150px;
+    text-align: center;
+    background: #ffffff;
+    border: 2px solid #2fa339
+}
+.selected-char img {
+    height: 90px;
+    width: 90px;
+}
+
+.selected-char p {
+    padding: 0;
+    margin: 0;
+}
 #player {
     /* float: left; */
     height: 150px;

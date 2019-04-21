@@ -4,21 +4,23 @@ $(document).ready(function () {
         health: 80,
         isAlive: true,
         attack: 20,
-        stage: url = 'assets/images/yodaStage.jpg'
+        stage: '../images/yodaStage.jpg'
     }
 
     const charLuke = {
         name: 'Luke Skywalker',
         health: 100,
         isAlive: true,
-        attack: 15
+        attack: 15,
+        stage: '#fff'
     }
 
     const charVader = {
         name: 'Darth Vader',
         health: 180,
         isAlive: true,
-        attack: 12
+        attack: 12,
+        stage: 'black'
     }
 
     const charHan = {
@@ -30,10 +32,14 @@ $(document).ready(function () {
 
     let charSelect = true;
     let enemySelect = false;
+    let fight = false;
     let charHealth = 0;
     let charAttack = 0;
     let enemyHealth = 0;
     let enemyAttack = 0;
+    let winCount = 0;
+    let newEnemyHealth = enemyHealth;
+    let newCharHealth = charHealth;
 
 
     $('#yoda').data(charYoda);
@@ -49,51 +55,73 @@ $(document).ready(function () {
             enemySelect = true;
             charHealth = $(this).data('health');
             charAttack = $(this).data('attack');
-            $(this).removeClass('#char');
+            $(this).removeClass('char');
+            $(this).addClass('selected-char');
             $('.char').appendTo($('#enemy-select'));
-            // $('.char').addClass('.red') FIX
+            $('.char').addClass('red');
             $(this).appendTo($('#player'));
+            $('#player').data(this);
             $(this).off('click');
 
 
-            console.log('charselect' + charSelect);
+            console.log($('.selected-char').data('health'))
+            console.log('charselect ' + charSelect);
             console.log($(this).data());
             console.log(charHealth);
             console.log(charAttack);
+            console.log($('#player').data(this))
 
         } else if (enemySelect) {
             enemySelect = false;
             $(this).appendTo($('#enemy'));
-            $('.char').off('click');
+            $(this).addClass('selected-enemy');
+            // $('.char').off('click');
             enemyHealth = $(this).data('health');
             enemyAttack = $(this).data('attack');
-            // $('body').css('background-image', $(this).data('stage')); FIX
+            fight = true;
+            // body.css('background-image', "$(this).data('stage')");
 
             console.log('enemyselect' + enemySelect);
             console.log(enemyHealth);
             console.log(enemyAttack);
-
+            console.log()
         }
 
-        if (charSelect === false && enemySelect === false) {
-            $('#attack').on('click', function () {
-                if (enemyHealth < 1) {
+        if (fight) {
+            newCharHealth = charHealth;
+            newEnemyHealth = enemyHealth;
+            $('#attackBtn').on('click', function () {
+                if (winCount > 2) {
+                    alert('YOU WIN')
+                } else if (newEnemyHealth < 1) {
+                    fight = false;
                     enemySelect = true;
+                    winCount++;
+                    $('#enemy').empty();
+                    $(this).off('click');
+                    $('.char').on('click');
 
-                } else if (charHealth < 1) {
-                    console.log('game over')
-                } else if (enemyHealth > 0 && charHealth > 0) {
-                    enemyHealth =  enemyHealth - charAttack;
-                    // enemyAttack = enemyAttack + (Math.Random() * 2); FIX
-                    charHealth = charHealth - enemyAttack;
-                    // charAttack = charAttack + (Math.Random() * 2); FIX
-                    $('#dmgText1').text(`You attack the enemy for ${charAttack} dmg they now have ${enemyHealth - charAttack}.`);
-                    $('#dmgText2').text(`they attack you for ${enemyAttack} dmg you now have ${charHealth - enemyAttack}.`);
+                    console.log('win count ' + winCount)
+                    console.log(enemySelect);
+                    console.log(fight);
+                } else if (newCharHealth < 1) {
+                    console.log('game over');
+                    $(this).off('click');
+                    alert('refresh page to play again')
+                } else {
+                    enemyAttack = (Math.floor(Math.random() * (30 - enemyAttack)) + enemyAttack);
+                    charAttack = (Math.floor(Math.random() * (30 - charAttack)) + charAttack);
+                    newEnemyHealth -= charAttack;
+                    newCharHealth -= enemyAttack;
+
+                    $('#dmgText1').text(`You attack the enemy for ${charAttack} dmg they now have ${newEnemyHealth}.`);
+                    $('#dmgText2').text(`they attack you for ${enemyAttack} dmg you now have ${newCharHealth}.`);
+
+                    console.log('button working');
+                    console.log(`You attack the enemy for ${charAttack} dmg they now have ${newEnemyHealth}.`);
+                    console.log(`they attack you for ${enemyAttack} dmg you now have ${newCharHealth}.`);
                 }
 
-                console.log('button working');
-                console.log(`You attack the enemy for ${charAttack} dmg they now have ${enemyHealth - charAttack}.`);
-                console.log(`they attack you for ${enemyAttack} dmg you now have ${charHealth - enemyAttack}.`);
             });
         }
     });
