@@ -1,3 +1,9 @@
+// consider audio and start/reset buttons
+// clean up attack button
+// get stage backgrounds to work
+// add lvl up feature
+
+
 $(document).ready(function () {
     const charYoda = {
         name: 'yoda',

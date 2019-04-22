@@ -1,4 +1,21 @@
+
+
+/* MAKE MEDIA QUERIES 
+dress up the page
+make text legible*/
+
+
+@font-face {
+    font-family: 'Audiowide';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Audiowide Regular'), local('Audiowide-Regular'), url(https://fonts.gstatic.com/s/audiowide/v7/l7gdbjpo0cum0ckerWCdlg_O.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+
 body {
+    font-family: 'Audiowide', cursive;
     background-image: url('../images/def-wallpaper.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -17,11 +34,11 @@ body {
     width: 150px;
     text-align: center;
     background: #ffffff;
-    border: 2px solid #2fa339
+    border: 2px solid #2fa339;
 }
 
 .red {
-    background-color: rgb(201, 15, 15);
+    background-color: #c70000;
 }
 .char img {
     height: 90px;
@@ -69,3 +86,4 @@ body {
 #dmgText1 {
     margin-bottom: 10px;
 }
+
