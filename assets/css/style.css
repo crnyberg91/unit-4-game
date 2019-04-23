@@ -1,9 +1,6 @@
-
-
 /* MAKE MEDIA QUERIES 
 dress up the page
 make text legible*/
-
 
 @font-face {
     font-family: 'Audiowide';
@@ -11,8 +8,7 @@ make text legible*/
     font-weight: 400;
     src: local('Audiowide Regular'), local('Audiowide-Regular'), url(https://fonts.gstatic.com/s/audiowide/v7/l7gdbjpo0cum0ckerWCdlg_O.woff2) format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-  }
-
+}
 
 body {
     font-family: 'Audiowide', cursive;
@@ -40,6 +36,7 @@ body {
 .red {
     background-color: #c70000;
 }
+
 .char img {
     height: 90px;
     width: 90px;
@@ -58,6 +55,7 @@ body {
     background: #ffffff;
     border: 2px solid #2fa339
 }
+
 .selected-char img {
     height: 90px;
     width: 90px;
@@ -67,6 +65,7 @@ body {
     padding: 0;
     margin: 0;
 }
+
 #player {
     /* float: left; */
     height: 150px;
@@ -77,6 +76,7 @@ body {
     /* float: left; */
     width: 100%;
 }
+
 #enemy {
     /* float: left; */
     height: 150px;
@@ -87,3 +87,13 @@ body {
     margin-bottom: 10px;
 }
 
+@media screen and (max-width: 991px) {
+
+    .title {
+        width: 100%;
+    }
+
+    .white-space {
+        width: 0px;
+    }
+}

@@ -1,3 +1,5 @@
+
+
 // consider audio and start/reset buttons
 // clean up attack button
 // get stage backgrounds to work
@@ -5,6 +7,7 @@
 
 
 $(document).ready(function () {
+
     const charYoda = {
         name: 'yoda',
         health: 80,
@@ -44,6 +47,7 @@ $(document).ready(function () {
     let enemyHealth = 0;
     let enemyAttack = 0;
     let winCount = 0;
+    let levelUp = 0;
     let newEnemyHealth = enemyHealth;
     let newCharHealth = charHealth;
 
@@ -103,20 +107,22 @@ $(document).ready(function () {
                     fight = false;
                     enemySelect = true;
                     winCount++;
+                    levelUp += 5;
                     $('#enemy').empty();
                     $(this).off('click');
                     $('.char').on('click');
 
-                    console.log('win count ' + winCount)
+                    console.log('win count ' + winCount);
                     console.log(enemySelect);
                     console.log(fight);
+                    console.log('level up: ' + levelUp);
                 } else if (newCharHealth < 1) {
                     console.log('game over');
                     $(this).off('click');
-                    alert('refresh page to play again')
+                    alert('refresh page to play again');
                 } else {
                     enemyAttack = (Math.floor(Math.random() * (30 - enemyAttack)) + enemyAttack);
-                    charAttack = (Math.floor(Math.random() * (30 - charAttack)) + charAttack);
+                    charAttack = (Math.floor(Math.random() * (30 - charAttack)) + charAttack + levelUp);
                     newEnemyHealth -= charAttack;
                     newCharHealth -= enemyAttack;
 
