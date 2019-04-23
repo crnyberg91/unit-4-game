@@ -13,7 +13,7 @@ $(document).ready(function () {
         health: 80,
         isAlive: true,
         attack: 20,
-        stage: '../images/yodaStage.jpg'
+        stage: 'url(assets/images/yodaStage.jpg)'
     }
 
     const charLuke = {
@@ -92,7 +92,7 @@ $(document).ready(function () {
             enemyHealth = $(this).data('health');
             enemyAttack = $(this).data('attack');
             fight = true;
-            // body.css('background-image', "$(this).data('stage')");
+            $('body').css('background', $(this).data('stage'));
 
             console.log('enemyselect' + enemySelect);
             console.log(enemyHealth);
@@ -116,7 +116,7 @@ $(document).ready(function () {
                     levelUp += 5;
                     level++;
                     alert(`LEVEL UP
-                    LEVEL : ${level}`);
+                    LEVEL: ${level}`);
                     $('#enemy').empty();
                     $(this).off('click');
                     $('.char').on('click');
