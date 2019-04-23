@@ -48,6 +48,7 @@ $(document).ready(function () {
     let enemyAttack = 0;
     let winCount = 0;
     let levelUp = 0;
+    let level = 1;
     let newEnemyHealth = enemyHealth;
     let newCharHealth = charHealth;
 
@@ -67,6 +68,7 @@ $(document).ready(function () {
             charAttack = $(this).data('attack');
             $(this).removeClass('char');
             $(this).addClass('selected-char');
+            // $(this).addClass('player-health'); FIX; possibly store in function
             $('.char').appendTo($('#enemy-select'));
             $('.char').addClass('red');
             $(this).appendTo($('#player'));
@@ -74,17 +76,18 @@ $(document).ready(function () {
             $(this).off('click');
 
 
-            console.log($('.selected-char').data('health'))
+            console.log($('.selected-char').data('health'));
             console.log('charselect ' + charSelect);
             console.log($(this).data());
             console.log(charHealth);
             console.log(charAttack);
-            console.log($('#player').data(this))
+            console.log($('#player').data(this));
 
         } else if (enemySelect) {
             enemySelect = false;
             $(this).appendTo($('#enemy'));
             $(this).addClass('selected-enemy');
+            $(this).addClass('defender-health');
             // $('.char').off('click');
             enemyHealth = $(this).data('health');
             enemyAttack = $(this).data('attack');
@@ -94,20 +97,26 @@ $(document).ready(function () {
             console.log('enemyselect' + enemySelect);
             console.log(enemyHealth);
             console.log(enemyAttack);
-            console.log()
+            console.log();
         }
 
         if (fight) {
             newCharHealth = charHealth;
             newEnemyHealth = enemyHealth;
+
+            if (winCount === 3) {
+                alert('YOU WIN');
+            }
+            
             $('#attackBtn').on('click', function () {
-                if (winCount > 2) {
-                    alert('YOU WIN')
-                } else if (newEnemyHealth < 1) {
+                if (newEnemyHealth < 1) {
                     fight = false;
                     enemySelect = true;
                     winCount++;
                     levelUp += 5;
+                    level++;
+                    alert(`LEVEL UP
+                    LEVEL : ${level}`);
                     $('#enemy').empty();
                     $(this).off('click');
                     $('.char').on('click');
@@ -119,13 +128,15 @@ $(document).ready(function () {
                 } else if (newCharHealth < 1) {
                     console.log('game over');
                     $(this).off('click');
-                    alert('refresh page to play again');
+                    alert('GAME OVER refresh page to play again');
                 } else {
                     enemyAttack = (Math.floor(Math.random() * (30 - enemyAttack)) + enemyAttack);
                     charAttack = (Math.floor(Math.random() * (30 - charAttack)) + charAttack + levelUp);
                     newEnemyHealth -= charAttack;
                     newCharHealth -= enemyAttack;
 
+                    $('player-health').text(newCharHealth);
+                    $('defender-health').text(newEnemyHealth);
                     $('#dmgText1').text(`You attack the enemy for ${charAttack} dmg they now have ${newEnemyHealth}.`);
                     $('#dmgText2').text(`they attack you for ${enemyAttack} dmg you now have ${newCharHealth}.`);
 
