@@ -56,6 +56,7 @@ $(document).ready(function () {
     let newCharHealth = charHealth;
     let charHealthDisplay;
     let enemyHealthDisplay;
+    let enemyName;
     $('#yoda').data(charYoda);
     $('#luke').data(charLuke);
     $('#vader').data(charVader);
@@ -91,6 +92,7 @@ $(document).ready(function () {
             $(this).appendTo($('#enemy'));
             $(this).addClass('selected-enemy');
             // $('.char').off('click');
+            enemyName = $(this).data('name');
             enemyHealth = $(this).data('health');
             enemyAttack = $(this).data('attack');
             enemyHealthDisplay = $(this).find('.health-bar');
@@ -120,8 +122,8 @@ $(document).ready(function () {
 
                     $(charHealthDisplay).text(newCharHealth);
                     $(enemyHealthDisplay).text(newEnemyHealth);
-                    $('#dmgText1').text(`You attack the enemy for ${charAttack * levelUp} dmg. They now have ${newEnemyHealth}.`);
-                    $('#dmgText2').text(`they attack you for ${enemyAttack} dmg. You now have ${newCharHealth}.`);
+                    $('#dmgText1').text(`you attack ${enemyName} for ${charAttack * levelUp} dmg. They now have ${newEnemyHealth}.`);
+                    $('#dmgText2').text(`${enemyName} counter-attacks you for ${enemyAttack} dmg. You now have ${newCharHealth}.`);
                     levelUp++;
                     console.log('button working');
                     console.log(`You attack the enemy for ${charAttack * levelUp} dmg. they now have ${newEnemyHealth}.`);
@@ -131,12 +133,14 @@ $(document).ready(function () {
                         fight = false;
                         enemySelect = true;
                         winCount++;
+                        $('#dmgText1').text(`You attack ${enemyName} for ${charAttack * levelUp} dmg. A killing blow.`);
+                        $('#dmgText2').text('');
                         $('#enemy').empty();
                         $('#attackBtn').off('click');
                         $('.char').on('click');
 
                         if (winCount === 3) {
-                            $('#dmgText1').text(`You attack the enemy for ${charAttack * levelUp} dmg. They now have ${newEnemyHealth}.`);
+                            $('#dmgText1').text(`You attack ${enemyName} for ${charAttack * levelUp} dmg. A killing blow.`);
                             $('#dmgText2').text('YOU WIN!!');
                             $('#attackBtn').off('click');
 
