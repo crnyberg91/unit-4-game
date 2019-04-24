@@ -2,8 +2,7 @@
 
 // consider audio and start/reset buttons
 // clean up attack button
-// get stage backgrounds to work
-// add lvl up feature
+
 
 
 $(document).ready(function () {
@@ -12,7 +11,8 @@ $(document).ready(function () {
         name: 'yoda',
         health: 80,
         isAlive: true,
-        attack: 20,
+        attack: 10,
+        counterAttack: 10,
         stage: 'url(assets/images/yodaStage.jpg)'
     }
 
@@ -20,23 +20,27 @@ $(document).ready(function () {
         name: 'Luke Skywalker',
         health: 100,
         isAlive: true,
-        attack: 15,
-        stage: '#fff'
+        attack: 6,
+        counterAttack: 8,
+        stage: 'url(assets/images/lukeStage.jpg)'
     }
 
     const charVader = {
         name: 'Darth Vader',
         health: 180,
         isAlive: true,
-        attack: 12,
-        stage: 'black'
+        attack: 5,
+        counterAttack: 6,
+        stage: 'url(assets/images/vaderStage.jpg)'
     }
 
     const charHan = {
         name: 'Han Solo',
         health: 90,
         isAlive: true,
-        attack: 18
+        attack: 8,
+        counterAttack: 9,
+        stage: 'url(assets/images/hanStage.jpg)'
     }
 
     let charSelect = true;
@@ -47,8 +51,7 @@ $(document).ready(function () {
     let enemyHealth = 0;
     let enemyAttack = 0;
     let winCount = 0;
-    let levelUp = 0;
-    let level = 1;
+    let levelUp = 1;
     let newEnemyHealth = enemyHealth;
     let newCharHealth = charHealth;
 
@@ -68,7 +71,6 @@ $(document).ready(function () {
             charAttack = $(this).data('attack');
             $(this).removeClass('char');
             $(this).addClass('selected-char');
-            // $(this).addClass('player-health'); FIX; possibly store in function
             $('.char').appendTo($('#enemy-select'));
             $('.char').addClass('red');
             $(this).appendTo($('#player'));
@@ -87,7 +89,6 @@ $(document).ready(function () {
             enemySelect = false;
             $(this).appendTo($('#enemy'));
             $(this).addClass('selected-enemy');
-            $(this).addClass('defender-health');
             // $('.char').off('click');
             enemyHealth = $(this).data('health');
             enemyAttack = $(this).data('attack');
@@ -97,56 +98,63 @@ $(document).ready(function () {
             console.log('enemyselect' + enemySelect);
             console.log(enemyHealth);
             console.log(enemyAttack);
-            console.log();
+            console.log(fight);
         }
+
 
         if (fight) {
             newCharHealth = charHealth;
             newEnemyHealth = enemyHealth;
 
-            if (winCount === 3) {
-                alert('YOU WIN');
-            }
-            
+            console.log('new charhealth ' + newCharHealth);
+            console.log('newenemyhealth ' + newEnemyHealth);
+
             $('#attackBtn').on('click', function () {
+
                 if (newEnemyHealth < 1) {
                     fight = false;
                     enemySelect = true;
                     winCount++;
-                    levelUp += 5;
-                    level++;
-                    alert(`LEVEL UP
-                    LEVEL: ${level}`);
                     $('#enemy').empty();
-                    $(this).off('click');
+                    $('#attackBtn').off('click');
                     $('.char').on('click');
+
+                    if (winCount === 3) {
+                        alert('YOU WIN');
+                        $('#attackBtn').off('click');
+    
+                    }
 
                     console.log('win count ' + winCount);
                     console.log(enemySelect);
                     console.log(fight);
                     console.log('level up: ' + levelUp);
+
                 } else if (newCharHealth < 1) {
                     console.log('game over');
-                    $(this).off('click');
+                    $('#attackBtn').off('click');
                     alert('GAME OVER refresh page to play again');
+
                 } else {
-                    enemyAttack = (Math.floor(Math.random() * (30 - enemyAttack)) + enemyAttack);
-                    charAttack = (Math.floor(Math.random() * (30 - charAttack)) + charAttack + levelUp);
-                    newEnemyHealth -= charAttack;
+                    enemyAttack = (enemyAttack);
+                    newEnemyHealth -= charAttack * levelUp;
                     newCharHealth -= enemyAttack;
+
 
                     $('player-health').text(newCharHealth);
                     $('defender-health').text(newEnemyHealth);
-                    $('#dmgText1').text(`You attack the enemy for ${charAttack} dmg they now have ${newEnemyHealth}.`);
+                    $('#dmgText1').text(`You attack the enemy for ${charAttack * levelUp} dmg they now have ${newEnemyHealth}.`);
                     $('#dmgText2').text(`they attack you for ${enemyAttack} dmg you now have ${newCharHealth}.`);
-
+                    levelUp++;
                     console.log('button working');
-                    console.log(`You attack the enemy for ${charAttack} dmg they now have ${newEnemyHealth}.`);
-                    console.log(`they attack you for ${enemyAttack} dmg you now have ${newCharHealth}.`);
+                    console.log(`You attack the enemy for ${charAttack * levelUp} dmg. they now have ${newEnemyHealth}.`);
+                    console.log(`they attack you back for ${enemyAttack} dmg. you now have ${newCharHealth}.`);
                 }
-
             });
+
+            // else {
+
+            // }
         }
     });
-
 });
